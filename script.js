@@ -16,7 +16,7 @@ class App {
     buttonLogin.addEventListener("click", this.#_buttonLogin.bind(this));
   }
 
-  #_spotifyRedirectUrl = () => {
+  #_spotifyRedirectUrl = (e) => {
     const redirect_uri = "http://127.0.0.1:5500/index.html";
     const state = CLIENT_SECRET;
     const scope = "user-read-private user-read-email";
@@ -32,7 +32,8 @@ class App {
     window.location.replace(url);
   };
 
-  #_getAccessToken = async () => {
+  #_getAccessToken = async (e) => {
+    e.preventDefault();
     this.#_spotifyRedirectUrl();
     const url = window.location.href;
     const accessToken = url.match(/\#(?:access_token)\=([\S\s]*?)\&/)[1];
