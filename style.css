@@ -1,0 +1,76 @@
+* {
+  padding: 0;
+  margin: 0;
+  background-color: #909590;
+  font-family: "Courier New", Courier, monospace;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+h1 {
+  font-size: 5rem;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+input {
+  margin: 1rem 0;
+  width: 13rem;
+  height: 2rem;
+  align-self: center;
+}
+
+button {
+  height: 2rem;
+  width: 8rem;
+  align-self: center;
+  border-radius: 1rem;
+  color: #fff;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+button:hover {
+  transition: 0.2s;
+  background-color: #474a48;
+}
+.main {
+  display: grid;
+  grid-template-rows: 1fr 1fr 5fr;
+  row-gap: 1rem;
+  width: 80%;
+  padding: 1rem;
+  justify-self: center;
+}
+
+.main > form {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  width: 15rem;
+}
+
+.artist__section {
+  display: flex;
+  flex-direction: row;
+  max-height: 20rem;
+}
+
+.hidden {
+  display: none;
+}
+
+#login__spotify {
+  justify-self: center;
+}
