@@ -1,10 +1,11 @@
 "use strict";
 
-const CLIENT_ID = "eb470c85f08345729da4666565608458";
-const CLIENT_SECRET = "fd946c869fa6411fb0511cfaa9b2f255";
+const CLIENT_ID = "";
+const CLIENT_SECRET = "";
 const API_URL = "https://api.spotify.com/v1";
 
 const sectionArtist = document.querySelector(".artist__section");
+const sectionArtistInfo = document.querySelector(".artist__info");
 const inputArtist = document.getElementById("input__artist");
 const buttonSearch = document.getElementById("button__search");
 const buttonLogin = document.getElementById("login__spotify");
@@ -13,10 +14,12 @@ let token = "";
 
 class App {
   constructor() {
+    localStorage.clear();
     buttonLogin.addEventListener("click", this.#_buttonLogin.bind(this));
   }
 
   #_spotifyRedirectUrl = (e) => {
+    e.preventDefault();
     const redirect_uri = "http://127.0.0.1:5500/index.html";
     const state = CLIENT_SECRET;
     const scope = "user-read-private user-read-email";
@@ -32,8 +35,7 @@ class App {
     window.location.replace(url);
   };
 
-  #_getAccessToken = async (e) => {
-    e.preventDefault();
+  #_getAccessToken = async () => {
     this.#_spotifyRedirectUrl();
     const url = window.location.href;
     const accessToken = url.match(/\#(?:access_token)\=([\S\s]*?)\&/)[1];
@@ -73,9 +75,34 @@ class APIController {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         const artist = data.artists?.items[0];
         console.log(artist);
+        this.#_displayArtistData(artist);
       });
+  };
+
+  #_displayArtistData = (artist) => {
+    const followers = artist.followers.total;
+    const imgURL = artist.images[0].url;
+    const name = artist.name;
+    const genres = artist.genres.join(" ");
+    const popularity = artist.popularity;
+
+    const html = `
+    <img
+            src="${imgURL}"
+            alt="${name}"
+          />
+          <div class="artist__info--text">
+            <h1>${name}</h1>
+            <h2>Music genres: <span>${genres}</span></h2>
+            <h2>Popularity on spotify: <span>${popularity}</span></h2>
+            <h2>Followers: <span></span>${followers}</h2>
+          </div>
+    `;
+
+    sectionArtistInfo.insertAdjacentHTML("afterbegin", html);
   };
 }
 

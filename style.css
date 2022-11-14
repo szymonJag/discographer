@@ -41,6 +41,9 @@ form {
   flex-direction: column;
 }
 
+section {
+}
+
 button:hover {
   transition: 0.2s;
   background-color: #474a48;
@@ -62,13 +65,47 @@ button:hover {
 }
 
 .artist__section {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  flex-direction: row;
+  column-gap: 5rem;
+  max-height: 20rem;
+}
+
+.artist__info {
   display: flex;
   flex-direction: row;
-  max-height: 20rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.artist__info > img {
+  width: 10rem;
+  border-radius: 1rem;
+  margin-right: 1rem;
+}
+
+.artist__info--text {
+  width: 20rem;
+}
+
+.artist__info--text > h1 {
+  font-size: 3rem;
+}
+
+.artist__info--text > h2 {
+  margin: 1rem 0;
+  text-align: center;
+  font-size: 1rem;
 }
 
 .hidden {
   display: none;
+}
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 #login__spotify {
